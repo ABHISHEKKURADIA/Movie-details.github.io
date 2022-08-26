@@ -1,0 +1,27 @@
+header,body
+{
+    background-color: aqua;
+    margin-top: 40px;
+    margin-left: 30px;
+}
+.row
+{
+    margin-top: 40px;
+    background-image: linear-gradient(to bottom right,aqua, skyblue, azure);
+}
+.main
+{
+    padding-right: 5%;
+    padding-bottom: 5%;
+}
+.poster
+{
+    bottom: 2%;
+    height: auto;
+    max-height: fit-content;
+}
+div .btn-outline-secondary
+{
+    position:absolute;
+    right: 0%;
+}
