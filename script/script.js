@@ -1,11 +1,12 @@
 var myElement=document.getElementsByTagName("input")[0];
         var body=document.getElementsByTagName("body")[0];
         var div=document.getElementsByTagName("div")[0];
+body.className="container-fluid mt-2";
 
         function apiCall()
         {
             let span=document.createElement("span");
-            span.className="main col-sm";
+            span.className="main col";
             let img=document.createElement("img");
             let p=document.createElement("p");
             let h1=document.createElement("h1");
