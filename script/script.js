@@ -7,9 +7,15 @@ body.className="container-fluid mt-2";
         {
             let span=document.createElement("span");
             span.className="main col";
+            span.id=myElement.value;
             let img=document.createElement("img");
             let p=document.createElement("p");
             let h1=document.createElement("h1");
+            let rm=document.createElement("input");
+            rm.setAttribute("type","button")
+            rm.setAttribute("value","Remove")
+            rm.setAttribute("class","btn btn-danger")
+            rm.setAttribute("onClick","return removeElement('"+span.id+"')");
             img.className="poster rounded img-responsive";
             $.getJSON('http://www.omdbapi.com/?i=tt3896198&apikey=aa00ff9e&t='+encodeURI(myElement.value)).then(function(res){
                 if(res.Error=="Movie not found!" || res.Error=="Movie not found!")
@@ -18,11 +24,11 @@ body.className="container-fluid mt-2";
                 }
                 h1.innerHTML=res.Title+" ("+res.Released.slice(-4)+")";
                 p.textContent=res.Plot;
-                console.log(res);
                 img.setAttribute("src",res.Poster);
                 span.appendChild(img);
                 span.appendChild(h1);
                 span.appendChild(p);
+                span.appendChild(rm);
                 div.appendChild(span);
             });
             return false;
@@ -56,10 +62,10 @@ body.className="container-fluid mt-2";
             return false;
         }
 
-        function removeElement(e)
+        function removeElement(txt)
         {
-            console.log(e);
-            e.parentElement.remove();
+            let id=document.getElementById(txt);
+            id.remove();
 
             return false;
         }
