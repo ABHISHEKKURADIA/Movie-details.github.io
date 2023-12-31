@@ -24,3 +24,8 @@ div .btn-outline-secondary
     position:absolute;
     right: 0%;
 }
+
+td
+{
+    border:1px solid black;
+}
