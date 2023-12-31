@@ -17,6 +17,11 @@ body.className="container-fluid mt-2";
             rm.setAttribute("class","btn btn-danger")
             rm.setAttribute("onClick","return removeElement('"+span.id+"')");
             img.className="poster rounded img-responsive";
+            let check=document.createElement("input");
+            check.setAttribute("type","button")
+            check.setAttribute("value","More")
+            check.setAttribute("class","btn btn-success")
+            check.setAttribute("onClick","return moreInfo('"+span.id+"')");
             $.getJSON('http://www.omdbapi.com/?i=tt3896198&apikey=aa00ff9e&t='+encodeURI(myElement.value)).then(function(res){
                 if(res.Error=="Movie not found!" || res.Error=="Movie not found!")
                 {
@@ -28,6 +33,7 @@ body.className="container-fluid mt-2";
                 span.appendChild(img);
                 span.appendChild(h1);
                 span.appendChild(p);
+                span.appendChild(check)
                 span.appendChild(rm);
                 div.appendChild(span);
             });
@@ -68,4 +74,44 @@ body.className="container-fluid mt-2";
             id.remove();
 
             return false;
+        }
+
+        function moreInfo(txt)
+        {
+            clearAll()
+            let span=document.createElement("span");
+            span.className="main col";
+            span.id=txt;
+            
+            $.getJSON('http://www.omdbapi.com/?i=tt3896198&apikey=aa00ff9e&t='+encodeURI(txt)).then(function(res){
+                if(res.Error=="Movie not found!" || res.Error=="Movie not found!")
+                {
+                    return false;
+                }
+                let table=document.createElement("table")
+                Object.keys(res).forEach((key,element) => {
+                let tr=document.createElement("tr")
+                let td1=document.createElement("td")
+                let td2=document.createElement("td")
+                td1.innerHTML=key
+                td2.innerHTML=res[key]
+                tr.appendChild(td1)
+                tr.appendChild(td2)
+                table.appendChild(tr)
+                });
+
+                span.appendChild(table);
+                div.appendChild(span);
+            });
+        }
+
+        function clearAll()
+        {
+            let root=document.getElementsByClassName("row")[0].getElementsByTagName("span")
+            for(let i=root.length-1;i>=0;i--)
+            {
+                root[i].remove()
+            }
+
+            return false
         }
