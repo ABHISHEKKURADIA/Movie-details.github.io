@@ -1,26 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    
     <title>API</title>
-<link rel="stylesheet" href="./style/style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="./style/style.css" />
+  </head>
+  <body>
     <header>
-    <input type="text" placeholder="Enter Your Movie name" class="form-control-lg">
-    <button onclick="return apiCall()" class="btn btn-primary">Search</button>
-    <input type="button" onclick="return sample()" class="btn btn-success" value="sample">
-    <input type="button" onclick="return clearAll()" class="btn btn-danger" value="Clear All"><br>
+      <h1>Movie Finder:</h1>
     </header>
-    <div class="row">
-
+    <div class="container-fluid">
+      <input
+        type="text"
+        placeholder="Enter Your Movie name"
+        id="movieName"
+        class="form-control-lg"
+      />
+      <button onclick="return apiCall()" class="btn btn-primary">Search</button>
+      <input
+        type="button"
+        onclick="return sample()"
+        class="btn btn-success"
+        value="sample"
+      />
+      <input
+        type="button"
+        onclick="return clearAll()"
+        class="btn btn-danger"
+        value="Clear All"
+      /><br />
     </div>
+    <hr>
+    <div id="row" class="container row"></div>
     <script src="./script/script.js"></script>
-</body>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </body>
 </html>

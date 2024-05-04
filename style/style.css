@@ -1,13 +1,9 @@
 header,body
 {
     background-color: white;
-    margin-top: 40px;
-    margin-left: 30px;
+    
 }
-.row
-{
-    margin-top: 40px;
-}
+
 .main
 {
     padding-right: 5%;
@@ -19,12 +15,6 @@ header,body
     height: auto;
     max-height: fit-content;
 }
-div .btn-outline-secondary
-{
-    position:absolute;
-    right: 0%;
-}
-
 td
 {
     border:1px solid black;
