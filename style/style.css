@@ -4,6 +4,9 @@ header,body
     
 }
 
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 .main
 {
     padding-right: 5%;
@@ -15,7 +18,7 @@ header,body
     height: auto;
     max-height: fit-content;
 }
-td
+.col-2
 {
-    border:1px solid black;
+    font-weight: bold;
 }
