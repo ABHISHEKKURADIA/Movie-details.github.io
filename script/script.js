@@ -4,6 +4,7 @@ var div = document.getElementById("row");
 body.className = "container-fluid mt-2";
 
 function apiCall() {
+  clearAll();
   let span = document.createElement("span");
   span.id = myElement.value;
   span.className = "col";
@@ -38,6 +39,7 @@ function apiCall() {
     span.appendChild(rm);
     div.appendChild(span);
   });
+  similarSuggestions(myElement.value);
   return false;
 }
 
@@ -80,6 +82,14 @@ function moreInfo(txt) {
   let span = document.createElement("span");
   span.id = txt;
 
+  const apiKey = "aa00ff9e&t"; // Replace with your actual API key
+  const searchTerm = txt; // Replace with the user input
+  const baseUrl = "http://www.omdbapi.com/";
+  const url = `${baseUrl}?s=${searchTerm}&apikey=${apiKey}`;
+  fetch(url).then((res) => {
+    console.log(res);
+  });
+
   $.getJSON(
     "http://www.omdbapi.com/?i=tt3896198&apikey=aa00ff9e&t=" + encodeURI(txt)
   ).then(function (res) {
@@ -99,22 +109,16 @@ function moreInfo(txt) {
       td2.innerHTML = res[key];
       if (key == "Ratings") {
         td2.innerHTML = "";
+        let ratingTable = document.createElement("table");
         res[key].forEach(function (e) {
-          td2.innerHTML = e;
-
-          let ratingTable = document.createElement("table");
-          Object.keys(e).forEach((key) => {
-            let tr = document.createElement("tr");
-            let td1 = document.createElement("td");
-            let td2 = document.createElement("td");
-            td1.innerHTML = key;
-            td2.innerHTML = e[key];
-            tr.appendChild(td1);
-            tr.appendChild(td2);
-            ratingTable.appendChild(tr);
-          });
-          td2.appendChild(ratingTable);
+          let tr = document.createElement("tr");
+          let td1 = document.createElement("td");
+          tr.appendChild(td1);
+          td1.innerHTML = `${e["Source"]} has Rated ${e["Value"]}`;
+          ratingTable.appendChild(tr);
         });
+
+        td2.appendChild(ratingTable);
       }
       if (key == "Poster") {
         let img = document.createElement("img");
@@ -131,6 +135,7 @@ function moreInfo(txt) {
     span.appendChild(table);
     div.appendChild(span);
   });
+  similarSuggestions(myElement.value);
 }
 
 function clearAll() {
@@ -140,5 +145,39 @@ function clearAll() {
     root[i].remove();
   }
 
+  return false;
+}
+
+async function similarSuggestions(txt) {
+  const apiKey = "aa00ff9e&t"; // Replace with your actual API key
+  const searchTerm = txt; // Replace with the user input
+  const baseUrl = "http://www.omdbapi.com/";
+  const url = `${baseUrl}?s=${searchTerm}&apikey=${apiKey}`;
+  const headElements = document.getElementById("headElements");
+  headElements.innerHTML=""
+  var res = await fetch(url);
+  var movies = await res.json();
+  let textNode = document.createTextNode(
+    "Looking for other movie? "
+  );
+  headElements.appendChild(textNode);
+  movies["Search"].forEach(function (e) {
+    let movieTitle = e["Title"];
+    if(movieTitle==myElement.value)
+      {
+        headElements.innerHTML=""
+        return
+      }
+    let tempLink = document.createElement("a");
+    let tempSpace = document.createTextNode("\u00A0 \u00A0");
+    tempLink.innerHTML = `${movieTitle} (${e["Year"]})`;
+    tempLink.href = `javascript:updateSearch("${movieTitle}")`;
+    headElements.appendChild(tempLink);
+    headElements.appendChild(tempSpace);
+  });
+}
+
+function updateSearch(txt) {
+  myElement.value = txt;
   return false;
 }
