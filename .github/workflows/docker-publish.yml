@@ -1,0 +1,27 @@
+name: Build and Push to Docker hub
+on:
+  push:
+    branches: ["main"]
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@4
+
+      - name: Login to Docker hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{secrets.DOCKERHUB_USERNAME}}
+          password: ${{secrets.DOCKERHUB_PASSWORD}}
+      - name: Build and Push Docker Image
+        uses: docker/builds-push-action@v5
+        with:
+          contect: .
+          push: true
+          tags: ABHISHEKKURADIA/Movie-details.github.io:latest
+
+
+
+
+        
